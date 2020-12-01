@@ -18,16 +18,53 @@ h1 {
   color: white;
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 30px;
+}
+#top-of-page {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 40px;
+  /* flex-direction: column; */
+}
+#search-terms {
+  display: flex;
+  flex-direction: column;
 }
 #search-field {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 15px;
-  margin-bottom: 40px;
+  /* margin-top: 15px;
+  margin-bottom: 40px; */
+}
+#media-player {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  width: 300px;
+  /* margin-bottom: 10px; */
+}
+
+#keyword {
+  font-size: 1rem;
+    /* text-align: right; */
+    padding-right: 5px;
+    height: 30px;
+    padding-left: 10px;
+  border-radius: 20px;
+  width: 200px;
+  background-color: rgb(239,239,239);
 }
 #submit {
-  margin-left: 10px;
+  margin-left: 15px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  width: 85px;
+}
+#buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 label {
   color: white;
@@ -102,4 +139,54 @@ img {
   width: 150px;
   border-radius: 10px 10px 0px 0px;
   border-radius: 10px;
+}
+
+.title-playing {
+  height: 50px;	
+  overflow: hidden;
+  position: relative;
+  background: yellow;
+  color: orange;
+  border: 1px solid orange;
+  width: 300px;
+ }
+ .title-playing p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+  /* Starting position */
+  -moz-transform:translateX(-100%);
+  -webkit-transform:translateX(-100%);	
+  transform:translateX(-100%);
+  /* Apply animation to this element */	
+  -moz-animation: scroll-right 15s linear infinite;
+  -webkit-animation: scroll-right 15s linear infinite;
+  animation: scroll-right 15s linear infinite;
+ }
+ /* Move it (define the animation) */
+ @-moz-keyframes scroll-right {
+  0%   { -moz-transform: translateX(-100%); }
+  100% { -moz-transform: translateX(100%); }
+ }
+ @-webkit-keyframes scroll-right {
+  0%   { -webkit-transform: translateX(-100%); }
+  100% { -webkit-transform: translateX(100%); }
+ }
+ @keyframes scroll-right {
+  0%   { 
+  -moz-transform: translateX(-100%); /* Browser bug fix */
+  -webkit-transform: translateX(-100%); /* Browser bug fix */
+  transform: translateX(-100%); 		
+  }
+  100% { 
+  -moz-transform: translateX(100%); /* Browser bug fix */
+  -webkit-transform: translateX(100%); /* Browser bug fix */
+  transform: translateX(100%); 
+  }
+ }
+ .title-playing {
+  color: black;
 }

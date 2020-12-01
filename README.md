@@ -16,13 +16,23 @@ Here are the steps you'll need to take in order to complete this project.
 ## Product Requirements
 
 - A user can search for songs by artist or band name.
+    <!-- COMPLETE -->
 - Validate the input so that a search request is not sent with no search term.
+    <!-- NOT COMPLETE -->
+    <!-- ALSO ADD A CONDITION THAT SONG TITLE NOT BE EMPTY -->
 - Display the search results without reloading the page.
+  <!-- NOT COMPLETE -->
 - The results should include song details. You must include the song title, but the data you'll get back from the API has other info you can consider including, like artist name, album title, album image, and release date.
+  <!-- PARTIAL - COMPLETE -- CURRENTLY DISPLAYING SONG NAME & ALBUM IMAGE -->
 - The number of results you show is up to you. If no results are returned from a search, your UI should communicate this to the user in a clear way (how you do this is up to you).
+  <!-- NEED ALERT FOR NO DATA RETURNED -->
 - You should handle responses from the server that are not in the 200 range in your javascript and also in your UI (for instance, you can show an error message and ask the user to repeat their search).
+  <!-- NEED A TRY CATCH OR SOMETHING FOR BAD INPUT -->
 - Allow the user to click on a song title to play a song preview.
+  <!-- WORKING - NEED TO CHECK REPEAT PLAYS -->
 - Your application should be nicely styled, with thought given to the user experience (that is, it should be easy for your user to interact with).
+  <!-- PARTIALLY COMPLETE -- NEED TO STYLE INPUT FIELD & MEDIA PLAYER
+  ALSO CONSIDER ADDING ARTIST NAME TO DISPLAY -->
 
 ### Setup with `npm`
 
@@ -44,8 +54,11 @@ One hard part will be getting the song to play. Since you will be dynamically ge
 ### 🌶️ Spicy Options
 
 - Add a radio button to switch the search between artist, song title, or album title.
+  <!-- THIS SHOULD BE FAIRLY EASY TO IMPLEMENT -->
 - Style your site so that it looks good on mobile screens as well as the desktop.
+  <!-- SO FAR DOESN"T LOOK TOO BAD BUT COULD USE SOME TWEAKS -->
 - Deploy your site using [GitHub Pages! 🚀](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/getting-started-with-github-pages)
+  <!-- NOT COMPLETE -- TEST THIS OUT ON A DIFFERENT REPO FIRST -->
 Publishing your project site using GitHub pages is pretty straightforward:
   - Make sure you have an `index.html` file at the root of your project.
   - Create a branch called `gh-pages` (this is the default publishing source for GitHub pages).

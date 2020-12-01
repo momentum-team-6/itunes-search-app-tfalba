@@ -10,15 +10,19 @@
 
   <body class='background-img'>
     <h1 class="form">iTunes Music Search</h1>
-    <form id = "search-field" class="row form-row">
-      <label for="login" value="login">Artist or Band Name</label>
-      <input id="login" type="text">
-      <div id="buttons">
-        <button id="submit">Submit</button>
-        <!-- <div id="clear">Clear</div> -->
-      </div>
-      <div id="media-player"></div>
-    </form>
+    <section id="top-of-page">
+      <form id = "search-field" class="row form-row">
+        <div id= "search-terms">
+          <label for="keyword" value="keyword">Artist or Band Name</label>
+          <input id="keyword" type="text">
+        </div>
+        <div id="buttons">
+          <button id="submit">Submit</button>
+          <!-- <div id="clear">Clear</div> -->
+        </div>
+      </form>
+    <div id="media-player"></div>
+  </section>
     <section id="card-holder"></section>
   </body>
 
