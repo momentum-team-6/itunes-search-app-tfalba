@@ -5,19 +5,26 @@
 }
 
 body {
-  background-color: black;
-  /* background-image: url("images/pexels-vova-krasilnikov-2796145.jpg"); */
+  background-color: rgba(0, 0, 0, 0.911);
+}
+h1 {
+  font-size: 3.5rem;
+}
+.background-img {
+  /* is there a transition that can be added on this? */
+  background-image: url("images/pexels-vova-krasilnikov-2796145.jpg");
 }
 .form {
   color: white;
   text-align: center;
+  margin-top: 30px;
 }
 #search-field {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 40px;
 }
 #submit {
   margin-left: 10px;
@@ -40,37 +47,59 @@ label {
 .card {
   background-color: rgb(15, 15, 15);
   display: flex;
-  width: 100px;
+  width: 200px;
   flex-direction: column;
   flex-wrap: wrap;
   /* align-content: center; */
-  /* border: 2px solid green; */
+  border: 4px solid #151211;
   margin: 10px;
   /* flex-basis: 150px; */
+  border-radius: 15px;
 }
-.title {
+
+.title, .collection {
   display: flex;
   flex-wrap: wrap;
   /* border: 1px solid blue; */
   display: flex;
-  justify-content: center;
-  background-color: black;
-  color: white;
-  padding-top: 5px;
-  padding-bottom: 3px;
-
+  /* justify-content: flex-end; */
+  /* background-color: black; */
+  color: #dbd8bc;
+    /* color: #c9c7c7; */
+  font-size: .7rem;
+  /* font-weight: 600; */
+  font-family: 'Futura';
+  margin-left: 15px;
+  margin-right: 8px;
 }
+.collection {
+  font-size: .6rem;
+  font-weight: 400;
+  color: #dbd8bc;
+  color: #c9c7c7;
 
+  margin-bottom: 7px;
+}
+.title {
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
 .image-div {
   display: flex;
-  justify-content: center;
-  width: 100px;
+  /* justify-content: center; */
+  /* width: 100px; */
+  margin-left: 15px;
+  /* width: 100px; */
 }
 img {
-  /* border: 2px solid pink; */
+  /*border: 2px solid pink; */
   display: flex;
   justify-content: center;
-  /* width: 100px;
-  height: 100px; */
+  /* height: 100%; */
+  /* width: 100%; */
   height: 100%;
+  /* flex-basis: 150px; */
+  width: 150px;
+  border-radius: 10px 10px 0px 0px;
+  border-radius: 10px;
 }
