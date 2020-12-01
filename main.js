@@ -7,7 +7,7 @@ const body = document.querySelector('body')
 //https://itunes.apple.com/search?term=john%2Blegend
 
 function getTracks (artist) {
-  const url = urlApi + artist
+  const url = urlApi + encodeURI(artist)
   // console.log(`${url}&media=music&entity=musicArtist`)
   fetch (url)
     .then(res => res.json())
@@ -17,6 +17,7 @@ function getTracks (artist) {
         renderTrack(result)
       }
       console.log(urlApi+artist)
+      console.log(url)
       // debugger
       // for (let song of user) {
       //   console.log(song.collectionName)
