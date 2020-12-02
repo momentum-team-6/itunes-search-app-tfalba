@@ -1,7 +1,14 @@
 
-const urlApiArtist = 'https://itunes.apple.com/search?media=music&attribute=artistTerm&term='
-const urlApiSong = 'https://itunes.apple.com/search?media=music&attribute=songTerm&term='
-const urlApiAlbum = 'https://itunes.apple.com/search?media=music&attribute=albumTerm&term='
+// const urlApiArtist = 'https://itunes.apple.com/search?media=music&attribute=artistTerm&term='
+// const urlApiSong = 'https://itunes.apple.com/search?media=music&attribute=songTerm&term='
+// const urlApiAlbum = 'https://itunes.apple.com/search?media=music&attribute=albumTerm&term='
+// const urlApiAll = 'https://itunes.apple.com/search?media=music&term='
+
+const urlApiArtist = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=artistTerm&term='
+const urlApiSong = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=songTerm&term='
+const urlApiAlbum = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=albumTerm&term='
+const urlApiAll = 'https://itunes-api-proxy.glitch.me/search?media=music&term='
+
 const audioPlayer = document.querySelector('#media-player')
 const cardHolder = document.querySelector('#card-holder')
 const form = document.querySelector('#search-field')
@@ -34,6 +41,9 @@ function getTracks (keyword, selector) {
     runSearch(url)
   } else if (selector === 'album') {
     const url = urlApiAlbum + encodeURI(keyword)
+    runSearch(url)
+  } else if (selector === 'all') {
+    const url = urlApiAll + encodeURI(keyword)
     runSearch(url)
   }
 }
@@ -99,7 +109,7 @@ function renderTrack(track) {
 /* ------------------------------------------------------------------------------------------------------------------ */
 const pastTargets = []
 cardHolder.addEventListener('click', function (event) {
-  if (typeof(event.target.dataset.target) === 'string') {
+  if (typeof (event.target.dataset.target) === 'string') {
     pastTargets.push(event.target)
     audioPlayer.classList.remove('hideme')
     const audioValue = event.target.dataset.target
@@ -130,6 +140,9 @@ form.addEventListener('submit', function (event) {
   } else if (selector.children[4].checked === true) {
     console.log('album is selected')
     getTracks(searchTerm.value, 'album')
+  } else {
+    console.log('defaulting to any')
+    getTracks(searchTerm.value, 'all')
   }
   // else return error message???
 

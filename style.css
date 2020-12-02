@@ -44,7 +44,7 @@ h1 {
     height: 30px;
     padding-left: 10px;
   border-radius: 20px;
-  width: 220px;
+  width: 240px;
   background-color: rgb(239,239,239);
 }
 #selector {
@@ -74,7 +74,7 @@ label {
   font-weight: 400;
   display: flex;
 }
-#song, #artist, #album {
+#song, #artist, #album, #all {
   display: flex;
 }
 #card-holder {
