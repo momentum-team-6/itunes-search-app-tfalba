@@ -13,6 +13,8 @@ const audioPlayer = document.querySelector('#media-player')
 const cardHolder = document.querySelector('#card-holder')
 const form = document.querySelector('#search-field')
 const searchTerm = document.querySelector('input')
+const selector = document.querySelector('#selector')
+const sortField = document.querySelector('#sort-field')
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*                                                   JSON Retrieval                                                   */
@@ -30,10 +32,15 @@ function runSearch (url) {
           // renderTrack(result)
         }
       }
-      const newArray = originalArray.sort(album)
+      const newArray = originalArray.sort(song)
       for (let i = 0; i < newArray.length; i++) {
         // console.log('am i getting to this line?')
         renderTrack(newArray[i])
+      }
+      if (originalArray.length === 0) {
+        renderTrack(originalArray)
+      } else {
+        sortField.classList.remove('hideme')
       }
     })
 }
@@ -128,16 +135,18 @@ function renderTrack(track) {
   newCard.appendChild(artistName)
 
   // debugger
+  if (originalArray.length === 0) {
+    cardHolder.innerHTML = 'Your search has returned no results. Please try a new one.'
+    console.log('no results')
+  } else {
+    trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" src=${track.artworkUrl100}></img>`
 
-  trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" src=${track.artworkUrl100}></img>`
+    trackTitle.innerHTML = track.trackName
 
-  trackTitle.innerHTML = track.trackName
-
-  const trackYear = track.releaseDate.slice(0,4)
-  collectionName.innerHTML = `${track.collectionName} (${trackYear})`
-  artistName.innerHTML = track.artistName
-
-
+    const trackYear = track.releaseDate.slice(0,4)
+    collectionName.innerHTML = `${track.collectionName} (${trackYear})`
+    artistName.innerHTML = track.artistName
+  }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -180,9 +189,7 @@ form.addEventListener('submit', function (event) {
   event.preventDefault()
   cardHolder.innerHTML = ''
   audioPlayer.innerHTML = ''
-  const selector = document.querySelector('#selector')
-  const sortField = document.querySelector('#sort-field')
-  sortField.classList.remove('hideme')
+  
   if (selector.children[0].checked === true) {
     console.log('artist is selected')
     getTracks(searchTerm.value, 'artist')
