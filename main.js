@@ -97,13 +97,23 @@ function renderTrack(track) {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*                                                   Event Listeners                                                  */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
+const pastTargets = []
 cardHolder.addEventListener('click', function (event) {
-  audioPlayer.classList.remove('hideme')
-  const audioValue = event.target.dataset.target
-  const titleValue = event.target.dataset.title
-
-  audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
+  if (typeof(event.target.dataset.target) === 'string') {
+    pastTargets.push(event.target)
+    audioPlayer.classList.remove('hideme')
+    const audioValue = event.target.dataset.target
+    const titleValue = event.target.dataset.title
+    if (pastTargets[pastTargets.length - 1] === (pastTargets[pastTargets.length - 2])) {
+      if (pastTargets[pastTargets.length - 1] === (pastTargets[pastTargets.length - 3])) {
+        audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
+      } else {
+        audioPlayer.innerHTML = `<audio controls src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
+      }
+    } else {
+      audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
+    }
+  }
 })
 
 form.addEventListener('submit', function (event) {
