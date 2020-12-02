@@ -67,12 +67,17 @@ function renderTrack(track) {
   artistName.classList.add('artist-name')
   newCard.appendChild(artistName)
 
+  // debugger
+
   trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" src=${track.artworkUrl100}></img>`
+  
   trackTitle.innerHTML = track.trackName
 
   const trackYear = track.releaseDate.slice(0,4)
   collectionName.innerHTML = `${track.collectionName} (${trackYear})`
   artistName.innerHTML = track.artistName
+
+  
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -97,6 +102,7 @@ cardHolder.addEventListener('click', function (event) {
   audioPlayer.classList.remove('hideme')
   const audioValue = event.target.dataset.target
   const titleValue = event.target.dataset.title
+
   audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
 })
 

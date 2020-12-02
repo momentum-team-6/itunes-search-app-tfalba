@@ -1,9 +1,7 @@
-
 * {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 body {
   background-color: rgba(0, 0, 0, 0.911);
 }
@@ -23,7 +21,6 @@ h1 {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 50px;
-  /* padding: 10px 16px; */
 }
 
 #search-terms {
@@ -36,19 +33,11 @@ h1 {
   align-content: center;
   width: 500px;
 }
-
-@keyframes fadein {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-
 #media-player {
   display: flex;
   justify-content: center;
   width: 500px;
-  animation: fadein 2s;
 }
-
 #keyword {
   font-size: 1rem;
     padding-right: 5px;
@@ -80,24 +69,14 @@ h1 {
   flex-direction: column;
   justify-content: flex-end;
 }
-/* 
-#test-box {
-  width: 1000px;
-  height: 2200px;
-  border: solid 3px white;
-} */
 label {
   color: white;
-  /* text-align: center; */
   font-weight: 400;
   display: flex;
 }
 #song, #artist, #album {
   display: flex;
 }
-/* #top-container: {
-  padding: 30px;
-} */
 #card-holder {
   background-color: rgba(39, 38, 38, 0.85);
   display: flex;
@@ -109,12 +88,10 @@ label {
   margin: 0 auto;
   margin-top: 20px;
   padding-top: 212px;
-  /* padding: 16px; */
 }
 #top-container {
   width: 100%;
   position: fixed;
-  /* padding: 10px 0; */
   background-color: #090808ed;
 }
 #top-container {
@@ -123,16 +100,6 @@ label {
 #fixed-footer {
   bottom: 0;
 }
-/* 
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-.sticky + #card-holder {
-  padding-top: 202px;
-} */
-
 .card {
   background-color: rgb(15, 15, 15);
   display: flex;
@@ -143,7 +110,6 @@ label {
   margin: 35px 15px 0px 15px;
   border-radius: 15px;
 }
-
 .title, .collection, .artist-name {
   display: flex;
   flex-wrap: wrap;
@@ -176,14 +142,13 @@ label {
   margin-right: 5px;
   justify-content: flex-end;
 }
-
 .card:hover {
   border: solid 4px #d3d1d1;
 }
 .image-div:hover img {
-  opacity: .4;
+  /* opacity: .4; */
+  border: solid 2px #d3d1d1;
 }
-
 img {
   display: flex;
   justify-content: center;
@@ -191,8 +156,8 @@ img {
   width: 180px;
   border-radius: 10px 10px 0px 0px;
   border-radius: 10px;
+  border: 2px solid black;
 }
-
 .title-playing {
   overflow: hidden;
   position: relative;
@@ -201,13 +166,12 @@ img {
   text-align: center;
   font-size: 1rem;
   font-weight: 600;
- }
- .title-playing p {
+}
+.title-playing p {
   position: absolute;
   width: 100%;
   height: 100%;
   margin-top: 8px;
-
   font-size: .9rem;
   font-weight: 400;
   text-align: center;
@@ -216,17 +180,16 @@ img {
   transform:translateX(-100%);
   /* Apply animation to this element */	
   animation: scroll-right 7s linear infinite;
- }
+}
  /* Move it (define the animation) */
- @keyframes scroll-right {
+@keyframes scroll-right {
   0%   { 
   transform: translateX(-100%); 		
   }
   100% { 
   transform: translateX(100%); 
   }
- }
-
+}
 .hideme {
   display: none;
 }
