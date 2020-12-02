@@ -1,13 +1,13 @@
 
-// const urlApiArtist = 'https://itunes.apple.com/search?media=music&attribute=artistTerm&term='
-// const urlApiSong = 'https://itunes.apple.com/search?media=music&attribute=songTerm&term='
-// const urlApiAlbum = 'https://itunes.apple.com/search?media=music&attribute=albumTerm&term='
-// const urlApiAll = 'https://itunes.apple.com/search?media=music&term='
+const urlApiArtist = 'https://itunes.apple.com/search?media=music&attribute=artistTerm&term='
+const urlApiSong = 'https://itunes.apple.com/search?media=music&attribute=songTerm&term='
+const urlApiAlbum = 'https://itunes.apple.com/search?media=music&attribute=albumTerm&term='
+const urlApiAll = 'https://itunes.apple.com/search?media=music&term='
 
-const urlApiArtist = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=artistTerm&term='
-const urlApiSong = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=songTerm&term='
-const urlApiAlbum = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=albumTerm&term='
-const urlApiAll = 'https://itunes-api-proxy.glitch.me/search?media=music&term='
+// const urlApiArtist = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=artistTerm&term='
+// const urlApiSong = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=songTerm&term='
+// const urlApiAlbum = 'https://itunes-api-proxy.glitch.me/search?media=music&attribute=albumTerm&term='
+// const urlApiAll = 'https://itunes-api-proxy.glitch.me/search?media=music&term='
 
 const audioPlayer = document.querySelector('#media-player')
 const cardHolder = document.querySelector('#card-holder')
@@ -17,19 +17,66 @@ const searchTerm = document.querySelector('input')
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*                                                   JSON Retrieval                                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
+let originalArray = []
 function runSearch (url) {
+  originalArray = []
   fetch (url)
     .then(res => res.json())
     .then(data => {
       // validateSearch(data)
       for (const result of data.results) {
         if (result.collectionName !== undefined) {
-          renderTrack(result)
+          originalArray.push(result)
+          // renderTrack(result)
         }
+      }
+      const newArray = originalArray.sort(album)
+      for (let i = 0; i < newArray.length; i++) {
+        // console.log('am i getting to this line?')
+        renderTrack(newArray[i])
       }
     })
 }
+
+/* ------------------------------- Now renderTrack over whichever array is appropriate ------------------------------ */
+function artist (a, b) {
+  // Use toUpperCase() to ignore character casing
+  const varA = a.artistName.toUpperCase()
+  const varB = b.artistName.toUpperCase()
+  let comparison = 0
+  if (varA > varB) {
+    comparison = 1
+  } else if (varA < varB) {
+    comparison = -1
+  }
+  return comparison
+}
+function album (a, b) {
+  // Use toUpperCase() to ignore character casing
+  const varA = a.collectionName.toUpperCase()
+  const varB = b.collectionName.toUpperCase()
+  let comparison = 0
+  if (varA > varB) {
+    comparison = 1
+  } else if (varA < varB) {
+    comparison = -1
+  }
+  return comparison
+}
+
+function song (a, b) {
+  // Use toUpperCase() to ignore character casing
+  const varA = a.trackName.toUpperCase()
+  const varB = b.trackName.toUpperCase()
+  let comparison = 0
+  if (varA > varB) {
+    comparison = 1
+  } else if (varA < varB) {
+    comparison = -1
+  }
+  return comparison
+}
+
 
 function getTracks (keyword, selector) {
   if (selector === 'artist') {
@@ -51,6 +98,9 @@ function getTracks (keyword, selector) {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*                                                  DOM Manipulation                                                  */
 /* ------------------------------------------------------------------------------------------------------------------ */
+
+// change track input to be input from whichever array want to display after sort
+// track is just the originalArray[i]
 
 function renderTrack(track) {
   // validateInput(track)
@@ -80,14 +130,14 @@ function renderTrack(track) {
   // debugger
 
   trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" src=${track.artworkUrl100}></img>`
-  
+
   trackTitle.innerHTML = track.trackName
 
   const trackYear = track.releaseDate.slice(0,4)
   collectionName.innerHTML = `${track.collectionName} (${trackYear})`
   artistName.innerHTML = track.artistName
 
-  
+
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
