@@ -112,22 +112,23 @@ label {
   flex-wrap: wrap;
   display: flex;
   color: #dbd8bc;
-  font-size: .8rem;
+  font-size: .9rem;
   font-family: 'Futura';
   margin-left: 15px;
   margin-right: 8px;
 }
 .collection {
-  font-size: .7rem;
+  font-size: .8rem;
   font-weight: 400;
   color: #dbd8bc;
-  color: #c9c7c7;
-
-  margin-bottom: 7px;
+  color: #e7e1a5;
+  margin-bottom: 4px;
 }
 .artist-name {
-  font-size: .8rem;
-  font-weight: 500;
+  font-size: .9rem;
+  font-family: monospace;
+  font-weight: 600;
+  color: #bf8f07d1;
 }
 .title {
   margin-top: 5px;

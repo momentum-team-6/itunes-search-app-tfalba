@@ -1,5 +1,7 @@
 
-const urlApi = 'https://itunes.apple.com/search?media=music&attribute=artistTerm&term='
+const urlApiArtist = 'https://itunes.apple.com/search?media=music&attribute=artistTerm&term='
+const urlApiSong = 'https://itunes.apple.com/search?media=music&attribute=songTerm&term='
+const urlApiAlbum = 'https://itunes.apple.com/search?media=music&attribute=albumTerm&term='
 const audioPlayer = document.querySelector('#media-player')
 const cardHolder = document.querySelector('#card-holder')
 const form = document.querySelector('#search-field')
@@ -9,8 +11,7 @@ const searchTerm = document.querySelector('input')
 /*                                                   JSON Retrieval                                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-function getTracks (artist) {
-  const url = urlApi + encodeURI(artist)
+function runSearch (url) {
   fetch (url)
     .then(res => res.json())
     .then(data => {
@@ -19,6 +20,23 @@ function getTracks (artist) {
         renderTrack(result)
       }
     })
+}
+
+function getTracks (keyword, selector) {
+  if (selector==='artist') {
+    const url = urlApiArtist + encodeURI(keyword)
+    console.log('running artist search')
+    runSearch(url)
+  } else if (selector==='song') {
+    const url = urlApiSong + encodeURI(keyword)
+    runSearch(url)
+  } else if (selector==='album') {
+    const url = urlApiAlbum + encodeURI(keyword)
+    runSearch(url)
+
+  }
+
+
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -53,7 +71,7 @@ function renderTrack(track) {
   trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" src=${track.artworkUrl100}></img>`
   trackTitle.innerHTML = track.trackName
   collectionName.innerHTML = track.collectionName
-  // artistName.innerHTML = track.artistName
+  artistName.innerHTML = track.artistName
 }
 
 
@@ -86,6 +104,21 @@ form.addEventListener('submit', function (event) {
   event.preventDefault()
   cardHolder.innerHTML = ''
   audioPlayer.innerHTML = ''
-  getTracks(searchTerm.value)
+  const selector = document.querySelector('#selector')
+  if (selector.children[0].checked === true) {
+    console.log('artist is selected')
+    getTracks(searchTerm.value, 'artist')
+  }
+  else if (selector.children[2].checked === true) {
+    console.log('song is selected')
+    getTracks(searchTerm.value, 'song')
+  }
+  else if (selector.children[4].checked === true) {
+    console.log('album is selected')
+    getTracks(searchTerm.value, 'album')
+  }
+  // else return error message???
+
+  //getTracks(searchTerm.value, selector)
   searchTerm.value = ''
 })
