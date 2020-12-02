@@ -9,33 +9,38 @@
 </head>
 
   <body class='background-img'>
-    <h1 class="form">iTunes Music Search</h1>
-    <section id="top-of-page">
-      <form id = "search-field" class="row form-row">
-        <div id= "search-terms">
-          <input id="keyword" type="text" placeholder="search term">
-          <!-- <label for="keyword" value="keyword">Search by:</label> -->
-          <!-- <input id="selector" type="radio"> -->
-          <div id="selector">
-            <input type="radio" id="artist" name="search-type" value="artist" default>
-            <label for="artist">Artist</label>
-            <input type="radio" id="song" name="search-type" value="song">
-            <label for="song">Song</label>
-            <input type="radio" id="album" name="search-type" value="album">
-            <label for="album">Album</label>
+    <div id="top-container">
+      <h1 class="form">iTunes Music Search</h1>
+      <div id="top-of-page">
+        <form id = "search-field" class="row form-row">
+          <div id= "search-terms">
+            <input id="keyword" type="text" placeholder="search term">
+            <!-- <label for="keyword" value="keyword">Search by:</label> -->
+            <!-- <input id="selector" type="radio"> -->
+            <div id="selector">
+              <input type="radio" id="artist" name="search-type" value="artist" default>
+              <label for="artist">Artist</label>
+              <input type="radio" id="song" name="search-type" value="song">
+              <label for="song">Song</label>
+              <input type="radio" id="album" name="search-type" value="album">
+              <label for="album">Album</label>
 
-        </div>
+            </div>
 
+          </div>
+          <div id="buttons">
+            <button id="submit">Submit</button>
+            <!-- <div id="clear">Clear</div> -->
+          </div>
+        </form>
+      <div id="media-player"></div>
+      </div>
+    </div>
+  <div id="card-holder">
+    <div id="test-box">Big Box</div>
+  </div>
+  <div id="fixed-footer"></div>
 
-        </div>
-        <div id="buttons">
-          <button id="submit">Submit</button>
-          <!-- <div id="clear">Clear</div> -->
-        </div>
-      </form>
-    <div id="media-player"></div>
-  </section>
-    <section id="card-holder"></section>
   </body>
 
 </html>
