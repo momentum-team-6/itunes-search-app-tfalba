@@ -26,8 +26,6 @@
               <label for="album">Album</label>
               <input type="radio" id="all" name="search-type" value="all">
               <label for="all">All</label>
-
-
             </div>
 
           </div>
@@ -35,6 +33,17 @@
             <button id="submit">Submit</button>
             <!-- <div id="clear">Clear</div> -->
           </div>
+          <div id="sort-field" class= "row hideme">
+            <label for="sort">Sort by:</label>
+            <select id="sort-options" name="sort-options">
+              <option value="Default"></option>
+              <option value="By Album">Album Title</option>
+              <option value="By Artist">Artist</option>
+              <option value="By Track">Track Title</option>
+              <option value="By Year">Release Year</option>
+            </select>
+          </div>
+
         </form>
       <div id="media-player"></div>
       </div>

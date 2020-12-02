@@ -181,6 +181,8 @@ form.addEventListener('submit', function (event) {
   cardHolder.innerHTML = ''
   audioPlayer.innerHTML = ''
   const selector = document.querySelector('#selector')
+  const sortField = document.querySelector('#sort-field')
+  sortField.classList.remove('hideme')
   if (selector.children[0].checked === true) {
     console.log('artist is selected')
     getTracks(searchTerm.value, 'artist')
