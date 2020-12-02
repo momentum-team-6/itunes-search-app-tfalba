@@ -5,9 +5,6 @@ const cardHolder = document.querySelector('#card-holder')
 const form = document.querySelector('#search-field')
 const searchTerm = document.querySelector('input')
 
-// use body if decide to change background on submit
-// const body = document.querySelector('body')
-
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*                                                   JSON Retrieval                                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -22,8 +19,6 @@ function getTracks (artist) {
         renderTrack(result)
       }
     })
-    // save for later if want to toggle background-img
-    // body.classList.remove('background-img')
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -47,13 +42,18 @@ function renderTrack(track) {
 
 /* ---------------------------- save this if want to add collection name or other details --------------------------- */
 
-  // const collectionName = document.createElement('div')
-  // collectionName.classList.add('collection')
-  // newCard.appendChild(collectionName)
+  const collectionName = document.createElement('div')
+  collectionName.classList.add('collection')
+  newCard.appendChild(collectionName)
 
-  trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title='${track.trackName}' src=${track.artworkUrl100}></img>`
+  const artistName = document.createElement('div')
+  artistName.classList.add('artist-name')
+  newCard.appendChild(artistName)
+
+  trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" src=${track.artworkUrl100}></img>`
   trackTitle.innerHTML = track.trackName
-  // collectionName.innerHTML = track.collectionName
+  collectionName.innerHTML = track.collectionName
+  // artistName.innerHTML = track.artistName
 }
 
 
@@ -76,14 +76,16 @@ function renderTrack(track) {
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 cardHolder.addEventListener('click', function (event) {
+  audioPlayer.classList.remove('hideme')
   const audioValue = event.target.dataset.target
   const titleValue = event.target.dataset.title
-  audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'><p>${titleValue}</p></div>`
+  audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
 })
 
 form.addEventListener('submit', function (event) {
   event.preventDefault()
   cardHolder.innerHTML = ''
+  audioPlayer.innerHTML = ''
   getTracks(searchTerm.value)
   searchTerm.value = ''
 })

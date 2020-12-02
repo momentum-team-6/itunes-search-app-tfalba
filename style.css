@@ -11,7 +11,6 @@ h1 {
   font-size: 3.5rem;
 }
 .background-img {
-  /* is there a transition that can be added on this? */
   background-image: url("images/pexels-vova-krasilnikov-2796145.jpg");
 }
 .form {
@@ -23,8 +22,7 @@ h1 {
 #top-of-page {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 40px;
-  /* flex-direction: column; */
+  margin-bottom: 110px;
 }
 #search-terms {
   display: flex;
@@ -34,31 +32,45 @@ h1 {
   display: flex;
   justify-content: center;
   align-content: center;
-  /* margin-top: 15px;
-  margin-bottom: 40px; */
+  width: 500px;
 }
+
+@keyframes fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 #media-player {
   display: flex;
   justify-content: center;
-  height: 50px;
-  width: 300px;
-  /* margin-bottom: 10px; */
+  width: 500px;
+  animation: fadein 2s;
 }
 
 #keyword {
   font-size: 1rem;
-    /* text-align: right; */
     padding-right: 5px;
     height: 30px;
     padding-left: 10px;
   border-radius: 20px;
-  width: 200px;
+  width: 220px;
   background-color: rgb(239,239,239);
+}
+#selector {
+  display: flex;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+#selector input {
+  margin-left: 9px;
+}
+#selector label {
+  margin-left: 5px;
 }
 #submit {
   margin-left: 15px;
   border-radius: 15px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   width: 85px;
 }
 #buttons {
@@ -68,54 +80,54 @@ h1 {
 }
 label {
   color: white;
-  margin-right: 5px;
+  /* text-align: center; */
+  font-weight: 400;
+  display: flex;
+}
+#song, #artist, #album {
+  display: flex;
 }
 #card-holder {
-  background-color: rgba(39, 38, 38, 0.76);
-  /* background-color: rgba(245, 245, 245, 0.543); */
+  background-color: rgba(39, 38, 38, 0.85);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   font-size: 9px;
   margin: 10px 150px 10px 150px;
-  /* padding: 10px; */
 }
 
 .card {
   background-color: rgb(15, 15, 15);
   display: flex;
-  width: 200px;
+  width: 260px;
   flex-direction: column;
   flex-wrap: wrap;
-  /* align-content: center; */
   border: 4px solid #151211;
   margin: 10px;
-  /* flex-basis: 150px; */
   border-radius: 15px;
 }
 
-.title, .collection {
+.title, .collection, .artist-name {
   display: flex;
   flex-wrap: wrap;
-  /* border: 1px solid blue; */
   display: flex;
-  /* justify-content: flex-end; */
-  /* background-color: black; */
   color: #dbd8bc;
-    /* color: #c9c7c7; */
-  font-size: .7rem;
-  /* font-weight: 600; */
+  font-size: .8rem;
   font-family: 'Futura';
   margin-left: 15px;
   margin-right: 8px;
 }
 .collection {
-  font-size: .6rem;
+  font-size: .7rem;
   font-weight: 400;
   color: #dbd8bc;
   color: #c9c7c7;
 
   margin-bottom: 7px;
+}
+.artist-name {
+  font-size: .8rem;
+  font-weight: 500;
 }
 .title {
   margin-top: 5px;
@@ -123,70 +135,60 @@ label {
 }
 .image-div {
   display: flex;
-  /* justify-content: center; */
-  /* width: 100px; */
   margin-left: 15px;
-  /* width: 100px; */
 }
+
+.card:hover {
+  border: solid 4px #d3d1d1;
+}
+.image-div:hover img {
+  opacity: .4;
+}
+
 img {
-  /*border: 2px solid pink; */
   display: flex;
   justify-content: center;
-  /* height: 100%; */
-  /* width: 100%; */
   height: 100%;
-  /* flex-basis: 150px; */
-  width: 150px;
+  width: 180px;
   border-radius: 10px 10px 0px 0px;
   border-radius: 10px;
 }
 
 .title-playing {
-  height: 50px;	
   overflow: hidden;
   position: relative;
-  background: yellow;
-  color: orange;
-  border: 1px solid orange;
-  width: 300px;
+  color: whitesmoke;
+  width: 250px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
  }
  .title-playing p {
   position: absolute;
   width: 100%;
   height: 100%;
-  margin: 0;
-  line-height: 50px;
+  margin-top: 5px;
+
+  font-size: .9rem;
+  font-weight: 400;
   text-align: center;
+  color: whitesmoke;
   /* Starting position */
-  -moz-transform:translateX(-100%);
-  -webkit-transform:translateX(-100%);	
   transform:translateX(-100%);
   /* Apply animation to this element */	
-  -moz-animation: scroll-right 15s linear infinite;
-  -webkit-animation: scroll-right 15s linear infinite;
-  animation: scroll-right 15s linear infinite;
+  animation: scroll-right 7s linear infinite;
  }
  /* Move it (define the animation) */
- @-moz-keyframes scroll-right {
-  0%   { -moz-transform: translateX(-100%); }
-  100% { -moz-transform: translateX(100%); }
- }
- @-webkit-keyframes scroll-right {
-  0%   { -webkit-transform: translateX(-100%); }
-  100% { -webkit-transform: translateX(100%); }
- }
  @keyframes scroll-right {
   0%   { 
-  -moz-transform: translateX(-100%); /* Browser bug fix */
-  -webkit-transform: translateX(-100%); /* Browser bug fix */
   transform: translateX(-100%); 		
   }
   100% { 
-  -moz-transform: translateX(100%); /* Browser bug fix */
-  -webkit-transform: translateX(100%); /* Browser bug fix */
   transform: translateX(100%); 
   }
  }
- .title-playing {
-  color: black;
+
+.hideme {
+  display: none;
 }
+
