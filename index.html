@@ -10,30 +10,26 @@
 
   <body class='background-img'>
     <div id="top-container">
-      <h1 class="form">iTunes Music Search</h1>
+      <h1 id="heading">iTunes Music Search</h1>
       <div id="top-of-page">
         <form id = "search-field" class="row form-row">
           <div id= "search-terms">
             <input id="keyword" type="text" placeholder="search term">
-            <!-- <label for="keyword" value="keyword">Search by:</label> -->
-            <!-- <input id="selector" type="radio"> -->
             <div id="selector">
-              <input type="radio" id="artist" name="search-type" value="artistTerm">
+              <input type="radio" id="artist" name="search-type" value="artistTerm" default checked>
               <label for="artist">Artist</label>
               <input type="radio" id="song" name="search-type" value="songTerm">
               <label for="song">Song</label>
               <input type="radio" id="album" name="search-type" value="albumTerm">
               <label for="album">Album</label>
-              <input type="radio" id="all" name="search-type" value="" default>
+              <input type="radio" id="all" name="search-type" value="">
               <label for="all">All</label>
             </div>
-
           </div>
           <div id="buttons">
             <button id="submit">Submit</button>
-            <!-- <div id="clear">Clear</div> -->
           </div>
-          <div id="sort-field" class= "row">
+          <div id="sort-field" class= "temp">
             <label for="sort">Sort Results By:</label>
             <select id="sort-options" name="sort-options" required>
               <option value="default"></option>
@@ -43,15 +39,12 @@
               <option value="year">Release Year</option>
             </select>
           </div>
-
         </form>
       <div id="media-player"></div>
       </div>
     </div>
-  <div id="card-holder">
-  </div>
-  <div id="fixed-footer"></div>
-
+    <div id="card-holder">
+    </div>
+    <div id="fixed-footer"></div>
   </body>
-
 </html>

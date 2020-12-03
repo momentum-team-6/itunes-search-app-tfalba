@@ -7,7 +7,6 @@ const cardHolder = document.querySelector('#card-holder')
 const form = document.querySelector('#search-field')
 const searchTerm = document.querySelector('input')
 const selector = document.querySelector('#selector')
-const sortField = document.querySelector('#sort-field')
 const sortOptions = document.querySelector('#sort-options')
 let originalArray = []
 
@@ -51,16 +50,15 @@ function runSearch (url) {
         newArray = originalArray
       }
 
-/* ------------------------------- Now renderTrack over whichever array is appropriate ------------------------------ */
-
-      for (let i = 0; i < newArray.length; i++) {
-        renderTrack(newArray[i])
-      }
+      /* ------------------------------- Now renderTrack over whichever array is appropriate ------------------------------ */
       if (originalArray.length === 0) {
         renderTrack(originalArray)
       } else {
-        sortField.classList.remove('hideme')
+        for (let i = 0; i < newArray.length; i++) {
+          renderTrack(newArray[i])
+        }
       }
+      audioPlayer.innerHTML = `<audio controls></audio><div class='title-playing'>Select Track to Sample<p></p></div>`
     })
 }
 
@@ -151,11 +149,10 @@ function renderTrack (track) {
   /* ------------------------------------------------ Validation checks ----------------------------------------------- */
   if (originalArray.length === 0) {
     cardHolder.innerHTML = 'Your search has returned no results. Please try a new one.'
-    console.log('no results')
   } else {
     /* -------------------------------------------- Else set content of card -------------------------------------------- */
 
-    trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" src=${track.artworkUrl100}></img>`
+    trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" data-artist="${track.artistName}" src=${track.artworkUrl100}></img>`
     trackTitle.innerHTML = track.trackName
     const trackYear = track.releaseDate.slice(0,4)
     collectionName.innerHTML = `${track.collectionName} (${trackYear})`
@@ -173,6 +170,8 @@ cardHolder.addEventListener('click', function (event) {
     audioPlayer.classList.remove('hideme')
     const audioValue = event.target.dataset.target
     const titleValue = event.target.dataset.title
+    // const artistValue = event.target.dataset.artist
+    // save above to use later
     if (pastTargets[pastTargets.length - 1] === (pastTargets[pastTargets.length - 2])) {
       if (pastTargets[pastTargets.length - 1] === (pastTargets[pastTargets.length - 3])) {
         audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
@@ -180,7 +179,7 @@ cardHolder.addEventListener('click', function (event) {
         audioPlayer.innerHTML = `<audio controls src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
       }
     } else {
-      audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
+      audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p class='now-playing'>${titleValue}</p></div>`
     }
   }
 })
@@ -190,27 +189,25 @@ form.addEventListener('submit', function (event) {
   cardHolder.innerHTML = ''
   audioPlayer.innerHTML = ''
 
-  for (let i = 0; i <= 6; i++) {
+  for (let i = 0; i <= 6; i += 2) {
     if (selector.children[i].checked === true) {
-      console.log(`${selector.children[i].value} is selected as selector`)
       getTracks(searchTerm.value, selector.children[i].value)
-    } else {
-      console.log("SHOULDN'T BE HERE -- NO SELECTOR CHECKED")
     }
   }
 })
 
 sortOptions.addEventListener('change', function (event) {
-  console.log("You've made it to sort! " + sortOptions.value)
   event.preventDefault()
   cardHolder.innerHTML = ''
   audioPlayer.innerHTML = ''
 
-  for (let i = 0; i <= 6; i++) {
+  for (let i = 0; i <= 6; i += 2) {
     if (selector.children[i].checked === true) {
       getTracks(searchTerm.value, selector.children[i].value)
-    } else {
-      console.log("SHOULDN'T BE HERE -- NO SELECTOR CHECKED FOR -- STUCK IN SORT FUNCTION")
     }
   }
+})
+
+searchTerm.addEventListener('click', function (event) {
+  searchTerm.value = ''
 })
