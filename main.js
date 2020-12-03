@@ -15,11 +15,14 @@ const form = document.querySelector('#search-field')
 const searchTerm = document.querySelector('input')
 const selector = document.querySelector('#selector')
 const sortField = document.querySelector('#sort-field')
+const sortOptions = document.querySelector('#sort-options')
+// let sortKeyword = sortOptions.value
+let originalArray = []
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*                                                   JSON Retrieval                                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
-let originalArray = []
+
 function runSearch (url) {
   originalArray = []
   fetch (url)
@@ -32,7 +35,22 @@ function runSearch (url) {
           // renderTrack(result)
         }
       }
-      const newArray = originalArray.sort(song)
+      let newArray = []
+      if (sortOptions.value !== 'default') {
+        if (sortOptions.value === 'artist') {
+          newArray = originalArray.sort(artist)
+        } else if (sortOptions.value === 'album') {
+          newArray = originalArray.sort(album)
+        } else if (sortOptions.value === 'song') {
+          newArray = originalArray.sort(song)
+        } else if (sortOptions.value === 'year') {
+          newArray = originalArray.sort(year)
+        } else {
+          newArray = originalArray
+        }
+      } else {
+        newArray = originalArray
+      }
       for (let i = 0; i < newArray.length; i++) {
         // console.log('am i getting to this line?')
         renderTrack(newArray[i])
@@ -84,22 +102,39 @@ function song (a, b) {
   return comparison
 }
 
-
-function getTracks (keyword, selector) {
-  if (selector === 'artist') {
-    const url = urlApiArtist + encodeURI(keyword)
-    console.log('running artist search')
-    runSearch(url)
-  } else if (selector === 'song') {
-    const url = urlApiSong + encodeURI(keyword)
-    runSearch(url)
-  } else if (selector === 'album') {
-    const url = urlApiAlbum + encodeURI(keyword)
-    runSearch(url)
-  } else if (selector === 'all') {
-    const url = urlApiAll + encodeURI(keyword)
-    runSearch(url)
+function year (a, b) {
+  // Use toUpperCase() to ignore character casing
+  const varA = a.releaseDate.toUpperCase()
+  const varB = b.releaseDate.toUpperCase()
+  let comparison = 0
+  if (varA > varB) {
+    comparison = 1
+  } else if (varA < varB) {
+    comparison = -1
   }
+  return comparison
+ }
+// don't need selector as an arg here...
+// function getTracks (keyword) {
+
+// }
+function getTracks (searchWord, selectionType) {
+  const url = `https://itunes.apple.com/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
+  runSearch(url)
+  // if (selector === 'artist') {
+  //   const url = urlApiArtist + encodeURI(keyword)
+  //   console.log('running artist search')
+  //   runSearch(url)
+  // } else if (selector === 'song') {
+  //   const url = urlApiSong + encodeURI(keyword)
+  //   runSearch(url)
+  // } else if (selector === 'album') {
+  //   const url = urlApiAlbum + encodeURI(keyword)
+  //   runSearch(url)
+  // } else if (selector === 'default') {
+  //   const url = urlApiAll + encodeURI(keyword)
+  //   runSearch(url)
+  // }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -189,22 +224,49 @@ form.addEventListener('submit', function (event) {
   event.preventDefault()
   cardHolder.innerHTML = ''
   audioPlayer.innerHTML = ''
-  
-  if (selector.children[0].checked === true) {
-    console.log('artist is selected')
-    getTracks(searchTerm.value, 'artist')
-  } else if (selector.children[2].checked === true) {
-    console.log('song is selected')
-    getTracks(searchTerm.value, 'song')
-  } else if (selector.children[4].checked === true) {
-    console.log('album is selected')
-    getTracks(searchTerm.value, 'album')
-  } else {
-    console.log('defaulting to any')
-    getTracks(searchTerm.value, 'all')
+
+  for (let i = 0; i <= 6; i++) {
+    if (selector.children[i].checked === true) {
+      console.log('artist is selected')
+      getTracks(searchTerm.value, selector.children[i].value)
+    }
+    else {
+      console.log('HELP')
+    }
   }
+
+  // if (selector.children[0].checked === true) {
+  //   console.log('artist is selected')
+  //   getTracks(searchTerm.value, selector.children[0].value)
+  // } else if (selector.children[2].checked === true) {
+  //   console.log('song is selected')
+  //   getTracks(searchTerm.value, selector.children[2].value)
+  // } else if (selector.children[4].checked === true) {
+  //   console.log('album is selected')
+  //   getTracks(searchTerm.value, selector.children[4].value)
+  // } else {
+  //   console.log('defaulting to all')
+  //   getTracks(searchTerm.value, selector.children[6].value)
+  // }
   // else return error message???
 
   //getTracks(searchTerm.value, selector)
-  searchTerm.value = ''
+  // searchTerm.value = ''
+})
+
+sortOptions.addEventListener('change', function (event) {
+  console.log("You've made it to sort! " + sortOptions.value)
+  event.preventDefault()
+  cardHolder.innerHTML = ''
+  audioPlayer.innerHTML = ''
+
+  for (let i = 0; i <= 6; i++) {
+    if (selector.children[i].checked === true) {
+      // console.log('artist is selected')
+      getTracks(searchTerm.value, selector.children[i].value)
+    }
+    else {
+      console.log('HELP')
+    }
+  }
 })

@@ -18,13 +18,13 @@
             <!-- <label for="keyword" value="keyword">Search by:</label> -->
             <!-- <input id="selector" type="radio"> -->
             <div id="selector">
-              <input type="radio" id="artist" name="search-type" value="artist" default>
+              <input type="radio" id="artist" name="search-type" value="artistTerm">
               <label for="artist">Artist</label>
-              <input type="radio" id="song" name="search-type" value="song">
+              <input type="radio" id="song" name="search-type" value="songTerm">
               <label for="song">Song</label>
-              <input type="radio" id="album" name="search-type" value="album">
+              <input type="radio" id="album" name="search-type" value="albumTerm">
               <label for="album">Album</label>
-              <input type="radio" id="all" name="search-type" value="all">
+              <input type="radio" id="all" name="search-type" value="" default>
               <label for="all">All</label>
             </div>
 
@@ -33,14 +33,14 @@
             <button id="submit">Submit</button>
             <!-- <div id="clear">Clear</div> -->
           </div>
-          <div id="sort-field" class= "row hideme">
+          <div id="sort-field" class= "row">
             <label for="sort">Sort Results By:</label>
             <select id="sort-options" name="sort-options" required>
-              <option value="Default"></option>
-              <option value="By Album">Album Title</option>
-              <option value="By Artist">Artist</option>
-              <option value="By Track">Track Title</option>
-              <option value="By Year">Release Year</option>
+              <option value="default"></option>
+              <option value="album">Album Title</option>
+              <option value="artist">Artist</option>
+              <option value="song">Track Title</option>
+              <option value="year">Release Year</option>
             </select>
           </div>
 
