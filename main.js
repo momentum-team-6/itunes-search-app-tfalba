@@ -116,7 +116,8 @@ function year (a, b) {
 
 /* ------------------------ Establishes url to execute search from values gained in listeners ----------------------- */
 function getTracks (searchWord, selectionType) {
-  const url = `https://itunes.apple.com/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
+  const url = `https://itunes-api-proxy.glitch.me/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
+  // const url = `https://itunes.apple.com/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
   runSearch(url)
 }
 
