@@ -15,55 +15,55 @@ let originalArray = []
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 function runSearch (url) {
-  originalArray = []
-  // validateSearch(data)
-  fetch (url)
-    .then(res => res.json())
-    .then(data => {
-
-/* --------------------------------- Push data for each track to an array of objects -------------------------------- */
-
-      for (const result of data.results) {
-        if (result.collectionName !== undefined) {
-          originalArray.push(result)
+  try {
+    originalArray = []
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+      /* ----------------------------- Push data for each track to an array of objects -------------------------------- */
+        for (const result of data.results) {
+          if (result.collectionName !== undefined) {
+            originalArray.push(result)
+          }
         }
-      }
+        /* ---------------- Sort each array depending on sort feature criteria -- use callback sort functions --------------- */
 
-/* ---------------- Sort each array depending on sort feature criteria -- use callback sort functions --------------- */
-
-/* -------------------------------- Either default or all sets new array as original -------------------------------- */
-
-      let newArray = []
-      if (sortOptions.value !== 'default') {
-        if (sortOptions.value === 'artist') {
-          newArray = originalArray.sort(artist)
-        } else if (sortOptions.value === 'album') {
-          newArray = originalArray.sort(album)
-        } else if (sortOptions.value === 'song') {
-          newArray = originalArray.sort(song)
-        } else if (sortOptions.value === 'year') {
-          newArray = originalArray.sort(year)
+        /* -------------------------------- Either default or all sets new array as original -------------------------------- */
+        let newArray = []
+        if (sortOptions.value !== 'default') {
+          if (sortOptions.value === 'artist') {
+            newArray = originalArray.sort(artist)
+          } else if (sortOptions.value === 'album') {
+            newArray = originalArray.sort(album)
+          } else if (sortOptions.value === 'song') {
+            newArray = originalArray.sort(song)
+          } else if (sortOptions.value === 'year') {
+            newArray = originalArray.sort(year)
+          } else {
+            newArray = originalArray
+          }
         } else {
           newArray = originalArray
         }
-      } else {
-        newArray = originalArray
-      }
-
-      /* ------------------------------- Now renderTrack over whichever array is appropriate ------------------------------ */
-      if (originalArray.length === 0) {
-        renderTrack(originalArray)
-      } else {
-        for (let i = 0; i < newArray.length; i++) {
-          renderTrack(newArray[i])
+        /* ------------------------------- Now renderTrack over whichever array is appropriate ------------------------------ */
+        if (originalArray.length === 0) {
+          renderTrack(originalArray)
+        } else {
+          for (let i = 0; i < newArray.length; i++) {
+            renderTrack(newArray[i])
+          }
         }
-      }
-      audioPlayer.innerHTML = `<audio controls></audio><div class='title-playing'>Select Track to Sample<p></p></div>`
-    })
+        if (originalArray.length > 0) {
+          audioPlayer.innerHTML = '<audio controls></audio><div class=\'title-playing\'>Select Track to Sample<p></p></div>'
+        }
+      })
+  } catch (error) {
+    console.error(error)
+    cardHolder.innerHTML = 'The server cannot handle this request. Please try again.'
+  }
 }
 
 /* ------------ Sets of combinations to set up for sort array based on whichever object key is being used ----------- */
-/* ---------------------------------- Could turn this into a function for all four ---------------------------------- */
 
 function artist (a, b) {
   // Use toUpperCase() to ignore character casing
@@ -114,6 +114,7 @@ function year (a, b) {
   return comparison
 }
 
+/* ------------------------ Establishes url to execute search from values gained in listeners ----------------------- */
 function getTracks (searchWord, selectionType) {
   const url = `https://itunes.apple.com/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
   runSearch(url)
@@ -151,17 +152,16 @@ function renderTrack (track) {
     cardHolder.innerHTML = 'Your search has returned no results. Please try a new one.'
   } else {
     /* -------------------------------------------- Else set content of card -------------------------------------------- */
-
     trackImage.innerHTML = `<img class='image' data-target=${track.previewUrl} data-title="${track.trackName}" data-artist="${track.artistName}" src=${track.artworkUrl100}></img>`
     trackTitle.innerHTML = track.trackName
-    const trackYear = track.releaseDate.slice(0,4)
+    const trackYear = track.releaseDate.slice(0, 4)
     collectionName.innerHTML = `${track.collectionName} (${trackYear})`
     artistName.innerHTML = track.artistName
   }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-/*                                                   Event Listeners                                                  */
+/*           Event Listeners - submit or form, change in sort, clear form field, and media play                                                  */
 /* ------------------------------------------------------------------------------------------------------------------ */
 const pastTargets = []
 cardHolder.addEventListener('click', function (event) {
