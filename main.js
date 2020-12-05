@@ -15,8 +15,8 @@ let originalArray = []
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 function runSearch (url) {
+  originalArray = []
   try {
-    originalArray = []
     fetch(url)
       .then(res => res.json())
       .then(data => {
@@ -116,8 +116,8 @@ function year (a, b) {
 
 /* ------------------------ Establishes url to execute search from values gained in listeners ----------------------- */
 function getTracks (searchWord, selectionType) {
-  const url = `https://itunes-api-proxy.glitch.me/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
-  // const url = `https://itunes.apple.com/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
+  // const url = `https://itunes-api-proxy.glitch.me/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
+  const url = `https://itunes.apple.com/search?media=music&attribute=${selectionType}&term=${encodeURI(searchWord)}`
   runSearch(url)
 }
 
@@ -164,7 +164,16 @@ function renderTrack (track) {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*           Event Listeners - submit or form, change in sort, clear form field, and media play                                                  */
 /* ------------------------------------------------------------------------------------------------------------------ */
+
+function togglePlay (toggle) {
+  if (toggle.paused) {
+    toggle.play()
+  } else {
+    toggle.pause()
+  }
+}
 const pastTargets = []
+
 cardHolder.addEventListener('click', function (event) {
   if (typeof (event.target.dataset.target) === 'string') {
     pastTargets.push(event.target)
@@ -173,12 +182,10 @@ cardHolder.addEventListener('click', function (event) {
     const titleValue = event.target.dataset.title
     // const artistValue = event.target.dataset.artist
     // save above to use later
-    if (pastTargets[pastTargets.length - 1] === (pastTargets[pastTargets.length - 2])) {
-      if (pastTargets[pastTargets.length - 1] === (pastTargets[pastTargets.length - 3])) {
-        audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
-      } else {
-        audioPlayer.innerHTML = `<audio controls src=${audioValue}></audio><div class='title-playing'>Now Playing<p>${titleValue}</p></div>`
-      }
+    const controller = document.querySelector('audio')
+
+    if (pastTargets[pastTargets.length - 1] === pastTargets[pastTargets.length - 2]) {
+      togglePlay(controller)
     } else {
       audioPlayer.innerHTML = `<audio controls autoplay src=${audioValue}></audio><div class='title-playing'>Now Playing<p class='now-playing'>${titleValue}</p></div>`
     }
